@@ -1,4 +1,6 @@
 import { myConfetti, spawnHeartAtMouse } from "./confetti"
+import { addCountAndUpdateCount, updateLikeCount } from "./like-counter"
+
 
 const likebtn = document.getElementById('likebtn')
 const heartOutlineSvg = document.getElementById('heart-outline')
@@ -7,6 +9,7 @@ const heartFillSvg = document.getElementById('heart-fill')
 let liked = false
 let extraLiked = 0
 likebtn.addEventListener("click", (e) => {
+  addCountAndUpdateCount()
   if (!liked) {
     heartOutlineSvg.classList.add('hidden')
     heartFillSvg.classList.remove('hidden')
@@ -36,3 +39,6 @@ likebtn.addEventListener("click", (e) => {
   }
   spawnHeartAtMouse(e)
 })
+
+
+updateLikeCount()
