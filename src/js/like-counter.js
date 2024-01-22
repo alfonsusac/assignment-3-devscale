@@ -11,6 +11,8 @@ export function updateLikeCount() {
 
 export function addCountAndUpdateCount() {
   const likeCount = document.getElementById("like-count")
+  likeCount.innerText = parseInt(likeCount.innerText) + 1 // optimistic ?
+
   fetch('https://portfolio-backend-sigma-ashen.vercel.app/like-count', {
     method: "POST"
   })
@@ -18,6 +20,8 @@ export function addCountAndUpdateCount() {
     .then(json => {
       const count = json.likes
       if (count === undefined) throw new Error('Count failed to be fetched after added')
-      likeCount.innerText = parseInt(count)
+    })
+    .catch(() => {
+      likeCount.innerText = parseInt(likeCount.innerText) - 1
     })
 }
